@@ -224,8 +224,6 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  align-items: center;
-  justify-content: center;
 }
 
 .sectionTitle {
@@ -284,7 +282,6 @@
   display: flex;
   align-items: flex-start;
   gap: 0.75rem;
-  justify-content: center;
 }
 
 .contactIcon {
@@ -451,43 +448,72 @@
   .footerContent {
     padding: 2rem 1rem 1.5rem;
   }
+  
   .footerGrid {
     grid-template-columns: 1fr;
     gap: 2rem;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
   }
-  .brandSection,
-  .linksSection,
-  .contactSection,
-  .ctaSection {
-    align-items: center;
+  
+  .brandSection {
     text-align: center;
-    margin: 0 auto;
-    width: 100%;
+    align-items: center;
   }
+  
+  .brandInfo {
+    align-items: center;
+  }
+  
+  .brandLogo {
+    align-self: center;
+  }
+  
   .socialLinks {
     justify-content: center;
   }
+  
+  .linksSection,
+  .contactSection,
+  .ctaSection {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .quickLinks {
+    align-items: center;
+  }
+  
+  .contactList {
+    align-items: center;
+  }
+  
+  .contactItem {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .ctaButton {
+    align-self: center;
+  }
+  
   .bottomContent {
     flex-direction: column;
     text-align: center;
     gap: 1.5rem;
     padding: 0 1rem;
-    align-items: center;
   }
+  
   .footerStats {
     justify-content: center;
     flex-wrap: wrap;
     gap: 1.5rem;
   }
+  
   .copyright {
     justify-content: center;
   }
+
   .footerBottom {
     padding: 1.5rem 1rem;
-    text-align: center;
   }
 }
 
@@ -495,67 +521,113 @@
   .footerContent {
     padding: 1.5rem 1rem 1rem;
   }
+  
   .footerGrid {
-    gap: 1.5rem;
-    justify-items: center;
-    align-items: center;
-    text-align: center;
+    gap: 2rem;
   }
+  
   .brandLogo {
     width: 50px;
     height: 50px;
     margin: 0 auto;
   }
+  
   .logoText {
     font-size: 1.5rem;
   }
+  
   .logoGlow {
     width: 50px;
     height: 50px;
   }
+  
+  .brandInfo {
+    align-items: center;
+  }
+  
   .brandName {
     font-size: 1.3rem;
   }
+  
   .brandTagline {
     font-size: 0.8rem;
   }
+  
   .socialLink {
     padding: 0.6rem;
+    min-width: 44px;
+    min-height: 44px;
   }
+  
+  .socialLinks {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
   .sectionTitle {
     font-size: 1rem;
+    text-align: center;
   }
+  
   .quickLink,
   .contactLink,
   .contactText,
   .ctaText {
     font-size: 0.85rem;
   }
+  
+  .quickLinks {
+    text-align: center;
+  }
+  
+  .quickLink {
+    padding-left: 0;
+    text-align: center;
+  }
+  
+  .quickLink::before {
+    display: none;
+  }
+  
+  .contactList {
+    text-align: center;
+  }
+  
+  .contactItem {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
   .footerStats {
     gap: 1.5rem;
   }
+  
   .statNumber {
     font-size: 0.9rem;
   }
+  
   .statLabel {
     font-size: 0.65rem;
   }
+  
   .copyright {
     font-size: 0.8rem;
   }
+
   .footerBottom {
     padding: 1rem 0.75rem;
-    text-align: center;
   }
+
   .bottomContent {
     padding: 0 0.5rem;
-    align-items: center;
-    text-align: center;
   }
+
   .ctaButton {
     padding: 0.75rem 1.5rem;
     font-size: 0.9rem;
     margin: 0 auto;
-    display: block;
+    display: flex;
   }
 } 
