@@ -23,6 +23,8 @@ html {
   color: var(--neon-blue);
   min-height: 100vh;
   cursor: default;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
@@ -32,6 +34,7 @@ html {
 
 body {
   height: 100%;
+  overflow-x: hidden;
 }
 
 p {
@@ -69,6 +72,10 @@ p {
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
+  min-height: 44px; /* Mobile touch target */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-primary:hover {
@@ -83,6 +90,8 @@ p {
   background-color: transparent;
   color: white;
   font-family: 'Poppins', sans-serif;
+  font-size: 16px; /* Prevents zoom on iOS */
+  min-height: 44px; /* Mobile touch target */
 }
 
 .form-input:focus {
@@ -121,4 +130,45 @@ p {
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--dark-blue);
+}
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  /* Improve touch targets */
+  button, a, input, textarea, select {
+    min-height: 44px;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+  
+  /* Improve text readability */
+  p, span, div {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Smaller touch targets for very small screens */
+  button, a {
+    min-height: 40px;
+  }
+  
+  /* Improve form elements */
+  input, textarea, select {
+    font-size: 16px;
+    min-height: 40px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 } 

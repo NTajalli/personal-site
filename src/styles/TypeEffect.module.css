@@ -29,5 +29,16 @@
   .typeEffect {
     font-size: 28px;
     padding: 5px;
+    min-height: 40px;
+    max-height: 40px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .typeEffect {
+    font-size: 22px;
+    padding: 3px;
+    min-height: 35px;
+    max-height: 35px;
   }
 } 

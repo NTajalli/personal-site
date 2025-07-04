@@ -464,10 +464,12 @@ textarea.formInput {
 @media (max-width: 768px) {
   .heroTitle {
     font-size: 2.5rem;
+    text-align: center;
   }
 
   .heroSubtitle {
     font-size: 1.1rem;
+    text-align: center;
   }
 
   .contactStats {
@@ -488,21 +490,36 @@ textarea.formInput {
 
   .formCard,
   .detailsCard {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .contactMethod {
     padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
   }
 
   .methodIcon {
     width: 40px;
     height: 40px;
     font-size: 1.2rem;
+    align-self: center;
   }
 
   .heroContent {
     padding: 0 1rem;
+  }
+
+  .formInput {
+    font-size: 16px; /* Prevents zoom on iOS */
+  }
+
+  .submitBtn {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
   }
 }
 
@@ -534,12 +551,12 @@ textarea.formInput {
 
   .formCard,
   .detailsCard {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .formInput {
     padding: 0.75rem;
-    font-size: 0.9rem;
+    font-size: 16px;
   }
 
   .submitBtn {
@@ -548,12 +565,33 @@ textarea.formInput {
   }
 
   .contactMethod {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
+    padding: 1rem 0.75rem;
   }
 
   .methodIcon {
-    align-self: center;
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+  }
+
+  .methodTitle {
+    font-size: 1rem;
+  }
+
+  .methodDescription {
+    font-size: 0.8rem;
+  }
+
+  .methodLink,
+  .methodText {
+    font-size: 0.9rem;
+  }
+
+  .availabilityTitle {
+    font-size: 1.1rem;
+  }
+
+  .availabilityDescription {
+    font-size: 0.8rem;
   }
 } 

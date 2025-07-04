@@ -471,10 +471,12 @@
 @media (max-width: 768px) {
   .heroTitle {
     font-size: 2.5rem;
+    text-align: center;
   }
 
   .heroSubtitle {
     font-size: 1.1rem;
+    text-align: center;
   }
 
   .projectStats {
@@ -496,17 +498,19 @@
 
   .featuredGrid {
     grid-template-columns: 1fr;
+    gap: 2rem;
     padding: 0 1rem;
   }
 
   .otherGrid {
     grid-template-columns: 1fr;
+    gap: 2rem;
     padding: 0 1rem;
   }
 
   .featuredCard,
   .otherCard {
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .cardHeader {
@@ -519,28 +523,59 @@
     align-self: center;
   }
 
+  .projectTitle {
+    font-size: 1.4rem;
+  }
+
+  .projectDescription {
+    font-size: 0.95rem;
+  }
+
   .projectActions {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .actionBtn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
   }
 
   .ctaCard {
     margin: 0 1rem;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
   }
 
   .ctaButtons {
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
   }
 
   .ctaBtnPrimary,
   .ctaBtnSecondary {
     width: 100%;
-    max-width: 300px;
+    max-width: 250px;
+    text-align: center;
   }
 
   .sectionContainer {
     padding: 0 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+
+  .techTags {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .techTag {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 }
 
@@ -567,22 +602,22 @@
   }
 
   .sectionTitle {
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
 
   .featuredCard,
   .otherCard {
-    padding: 1.5rem;
+    padding: 1.5rem 1rem;
   }
 
   .projectIcon {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
   }
 
   .projectTitle {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
 
   .projectDescription {
@@ -592,5 +627,20 @@
   .actionBtn {
     padding: 0.6rem 1.2rem;
     font-size: 0.8rem;
+  }
+
+  .ctaCard {
+    padding: 1.5rem 1rem;
+  }
+
+  .ctaBtnPrimary,
+  .ctaBtnSecondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .techTag {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.6rem;
   }
 } 

@@ -6,14 +6,14 @@ import { usePathname } from 'next/navigation';
 import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 20;
-      setScrolled(isScrolled);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -22,134 +22,142 @@ const Navbar = () => {
 
   // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    if (isOpen) {
+    if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
 
+    // Cleanup on unmount
     return () => {
       document.body.style.overflow = 'unset';
     };
-  }, [isOpen]);
+  }, [isMenuOpen]);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [pathname]);
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const closeMenu = () => {
-    setIsOpen(false);
+    setIsMenuOpen(false);
   };
 
   const isActive = (path: string) => {
     return pathname === path;
   };
 
+  const navigationLinks = [
+    { href: '/', label: 'Home' },
+    { href: '/about', label: 'About' },
+    { href: '/projects', label: 'Projects' },
+    { href: '/contact', label: 'Contact' }
+  ];
+
   return (
     <>
-      <nav className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
-        {/* Particle effect background */}
+      <header className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''}`}>
+        {/* Particle background effect */}
         <div className={styles.particleBackground}>
-          <div className={styles.particle}></div>
-          <div className={styles.particle}></div>
-          <div className={styles.particle}></div>
-          <div className={styles.particle}></div>
-          <div className={styles.particle}></div>
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className={`${styles.particle} ${styles[`particle${i + 1}`]}`}></div>
+          ))}
         </div>
 
-        <div className={styles.navContainer}>
-          {/* Logo/Brand */}
+        <div className={styles.container}>
+          {/* Brand/Logo */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.brandLink}>
+            <Link href="/" className={styles.brandLink} onClick={closeMenu}>
               <span className={styles.brandText}>NT</span>
               <div className={styles.brandGlow}></div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className={styles.desktopLinks}>
-            <Link 
-              href="/" 
-              className={`${styles.navLink} ${isActive('/') ? styles.active : ''}`}
-            >
-              <span className={styles.linkText}>Home</span>
-              <div className={styles.linkUnderline}></div>
-            </Link>
-            <Link 
-              href="/about" 
-              className={`${styles.navLink} ${isActive('/about') ? styles.active : ''}`}
-            >
-              <span className={styles.linkText}>About</span>
-              <div className={styles.linkUnderline}></div>
-            </Link>
-            <Link 
-              href="/projects" 
-              className={`${styles.navLink} ${isActive('/projects') ? styles.active : ''}`}
-            >
-              <span className={styles.linkText}>Projects</span>
-              <div className={styles.linkUnderline}></div>
-            </Link>
-            <Link 
-              href="/contact" 
-              className={`${styles.navLink} ${isActive('/contact') ? styles.active : ''}`}
-            >
-              <span className={styles.linkText}>Contact</span>
-              <div className={styles.linkUnderline}></div>
-            </Link>
-          </div>
+          <nav className={styles.desktopNav} aria-label="Main navigation">
+            <ul className={styles.navList}>
+              {navigationLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`${styles.navLink} ${isActive(link.href) ? styles.active : ''}`}
+                  >
+                    <span className={styles.linkText}>{link.label}</span>
+                    <div className={styles.linkUnderline}></div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
           {/* Mobile Menu Button */}
-          <button 
-            className={`${styles.hamburger} ${isOpen ? styles.active : ''}`} 
+          <button
+            className={`${styles.menuButton} ${isMenuOpen ? styles.active : ''}`}
             onClick={toggleMenu}
-            aria-label="Toggle menu"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
           >
             <span className={styles.hamburgerLine}></span>
             <span className={styles.hamburgerLine}></span>
             <span className={styles.hamburgerLine}></span>
           </button>
         </div>
+      </header>
 
-        {/* Mobile Navigation */}
-        <div className={`${styles.mobileLinks} ${isOpen ? styles.open : ''}`}>
-          <div className={styles.mobileLinksContainer}>
-            <div className={styles.mobileHeader}>
-              <span className={styles.mobileTitle}>Navigation</span>
-            </div>
-            <Link 
-              href="/" 
-              className={`${styles.mobileLink} ${isActive('/') ? styles.active : ''}`} 
+      {/* Mobile Navigation Overlay */}
+      <div 
+        className={`${styles.mobileOverlay} ${isMenuOpen ? styles.open : ''}`}
+        onClick={closeMenu}
+        aria-hidden={!isMenuOpen}
+      />
+
+      {/* Mobile Navigation Menu */}
+      <nav 
+        className={`${styles.mobileNav} ${isMenuOpen ? styles.open : ''}`}
+        aria-label="Mobile navigation"
+        aria-hidden={!isMenuOpen}
+      >
+        <div className={styles.mobileNavContent}>
+          <div className={styles.mobileHeader}>
+            <h2 className={styles.mobileTitle}>Navigation</h2>
+            <button 
+              className={styles.backButton}
               onClick={closeMenu}
+              aria-label="Close navigation"
             >
-              <span className={styles.mobileLinkText}>Home</span>
-            </Link>
-            <Link 
-              href="/about" 
-              className={`${styles.mobileLink} ${isActive('/about') ? styles.active : ''}`} 
-              onClick={closeMenu}
-            >
-              <span className={styles.mobileLinkText}>About</span>
-            </Link>
-            <Link 
-              href="/projects" 
-              className={`${styles.mobileLink} ${isActive('/projects') ? styles.active : ''}`} 
-              onClick={closeMenu}
-            >
-              <span className={styles.mobileLinkText}>Projects</span>
-            </Link>
-            <Link 
-              href="/contact" 
-              className={`${styles.mobileLink} ${isActive('/contact') ? styles.active : ''}`} 
-              onClick={closeMenu}
-            >
-              <span className={styles.mobileLinkText}>Contact</span>
-            </Link>
+              <svg 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+              >
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+              </svg>
+            </button>
           </div>
+          <ul className={styles.mobileNavList}>
+            {navigationLinks.map((link, index) => (
+              <li key={link.href} style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
+                <Link
+                  href={link.href}
+                  className={`${styles.mobileLink} ${isActive(link.href) ? styles.active : ''}`}
+                  onClick={closeMenu}
+                >
+                  <span className={styles.mobileLinkText}>{link.label}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </nav>
-      
-      {/* Overlay for mobile menu */}
-      {isOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
     </>
   );
 };

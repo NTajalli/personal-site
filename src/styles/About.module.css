@@ -472,15 +472,17 @@
   .heroContent {
     grid-template-columns: 1fr;
     gap: 2rem;
-    text-align: center;
+    padding: 0 1rem;
   }
 
   .heroTitle {
     font-size: 2.5rem;
+    text-align: center;
   }
 
   .heroSubtitle {
     font-size: 1.1rem;
+    text-align: center;
   }
 
   .heroStats {
@@ -493,7 +495,7 @@
   }
 
   .statNumber {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
   }
 
   .statLabel {
@@ -502,24 +504,41 @@
 
   .aboutGrid {
     grid-template-columns: 1fr;
-    padding: 0 1rem;
+    gap: 1.5rem;
   }
 
   .skillsGrid {
     grid-template-columns: 1fr;
-    padding: 0 1rem;
+    gap: 1.5rem;
+  }
+
+  /* Enhanced Timeline Mobile Layout */
+  .timeline {
+    position: relative;
+    padding-left: 0;
   }
 
   .timeline::before {
-    left: 20px;
+    left: 15px;
+    width: 2px;
   }
 
   .timelineItem {
-    padding-left: 60px;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
   }
 
   .timelineMarker {
-    width: 40px;
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0;
+    flex-shrink: 0;
+    z-index: 2;
   }
 
   .markerDot {
@@ -528,17 +547,87 @@
   }
 
   .markerLine {
-    height: 30px;
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--neon-blue), transparent);
+  }
+
+  .timelineItem:last-child .markerLine {
+    display: none;
+  }
+
+  .timelineContent {
+    margin-left: 0;
+    padding-left: 0;
+    flex: 1;
+    background: rgba(44, 47, 51, 0.8);
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid rgba(0, 255, 255, 0.2);
+  }
+
+  .timelineContent::before {
+    display: none;
   }
 
   .jobHeader {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .companyName {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .location, .duration {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+
+  .jobTitle {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .jobDescription {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .achievements {
+    margin-top: 1rem;
+  }
+
+  .achievements h5 {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .achievements ul {
+    padding-left: 1rem;
+  }
+
+  .achievements li {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
   }
 
   .sectionContainer {
     padding: 0 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
   }
 }
 
@@ -557,8 +646,8 @@
   }
 
   .headshot {
-    width: 150px !important;
-    height: 150px !important;
+    width: 150px;
+    height: 150px;
   }
 
   .headshotGlow {
@@ -567,12 +656,76 @@
   }
 
   .sectionTitle {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
   }
 
   .aboutCard,
-  .skillGroup,
-  .timelineContent {
+  .skillGroup {
     padding: 1.5rem;
+  }
+
+  /* Enhanced Small Screen Timeline */
+  .timeline::before {
+    left: 12px;
+  }
+
+  .timelineItem {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .timelineMarker {
+    width: 24px;
+    height: 24px;
+  }
+
+  .markerDot {
+    width: 12px;
+    height: 12px;
+  }
+
+  .markerLine {
+    top: 24px;
+    height: 50px;
+  }
+
+  .timelineContent {
+    padding: 1.25rem;
+    border-radius: 10px;
+  }
+
+  .companyName {
+    font-size: 1.1rem;
+  }
+
+  .location, .duration {
+    font-size: 0.85rem;
+  }
+
+  .jobTitle {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .jobDescription {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .achievements h5 {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .achievements li {
+    font-size: 0.8rem;
+    line-height: 1.3;
+    margin-bottom: 0.4rem;
+  }
+
+  .sectionContainer {
+    padding: 0 0.75rem;
   }
 } 
