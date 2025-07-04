@@ -48,7 +48,16 @@ const Navbar = () => {
   };
 
   const isActive = (path: string) => {
-    return pathname === path;
+    // Debug: log the current pathname and path being compared
+    console.log('Current pathname:', pathname, 'Comparing with:', path);
+    
+    // Handle exact matches and trailing slashes
+    if (path === '/') {
+      return pathname === '/';
+    }
+    
+    // For other paths, handle both with and without trailing slashes
+    return pathname === path || pathname === `${path}/`;
   };
 
   const navigationLinks = [

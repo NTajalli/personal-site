@@ -122,7 +122,7 @@ export default function About() {
                   <div className={styles.jobHeader}>
                     <h3 className={styles.companyName}>Amazon Web Services (AWS)</h3>
                     <span className={styles.location}>Seattle, WA</span>
-                    <span className={styles.duration}>January 2025 - Present</span>
+                    <span className={styles.duration}>July 2025 - Present</span>
                   </div>
                   <h4 className={styles.jobTitle}>Software Development Engineer</h4>
                   <p className={styles.jobDescription}>
