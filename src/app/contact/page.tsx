@@ -10,7 +10,7 @@ export default function Contact() {
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Get In Touch</h1>
             <p className={styles.heroSubtitle}>
-              Let's discuss opportunities, collaborations, or just say hello!
+              Let&apos;s discuss opportunities, collaborations, or just say hello!
             </p>
             <div className={styles.contactStats}>
               <div className={styles.stat}>
@@ -36,7 +36,7 @@ export default function Contact() {
               <div className={styles.formHeader}>
                 <h2 className={styles.formTitle}>Send a Message</h2>
                 <p className={styles.formSubtitle}>
-                  I'd love to hear from you! Fill out the form below and I'll get back to you as soon as possible.
+                  I&apos;d love to hear from you! Fill out the form below and I&apos;ll get back to you as soon as possible.
                 </p>
               </div>
               
@@ -85,7 +85,7 @@ export default function Contact() {
                     name="subject" 
                     required 
                     className={styles.formInput}
-                    placeholder="What's this about?"
+                    placeholder="What&apos;s this about?"
                   />
                 </div>
 
@@ -167,8 +167,8 @@ export default function Contact() {
                   <span className={styles.statusText}>Open to new opportunities</span>
                 </div>
                 <p className={styles.availabilityDescription}>
-                  I'm currently working as a Software Development Engineer at AWS on the EC2 VPC team. 
-                  I'm always interested in discussing interesting projects, networking opportunities, and potential collaborations!
+                  I&apos;m currently working as a Software Development Engineer at AWS on the EC2 VPC team. 
+                  I&apos;m always interested in discussing interesting projects, networking opportunities, and potential collaborations!
                 </p>
               </div>
             </div>

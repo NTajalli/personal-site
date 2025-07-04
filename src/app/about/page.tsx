@@ -30,7 +30,7 @@ export default function About() {
               </div>
             </div>
             <div className={styles.heroText}>
-              <h1 className={styles.heroTitle}>Hi, I'm Noah</h1>
+              <h1 className={styles.heroTitle}>Hi, I&apos;m Noah</h1>
               <p className={styles.heroSubtitle}>
                 Software Development Engineer at AWS • UMD Graduate
               </p>
@@ -70,8 +70,8 @@ export default function About() {
                 <h3>Current Role</h3>
                 <p>
                   Software Development Engineer at AWS working on the EC2 VPC team, where I contribute to building and maintaining 
-                  the core networking infrastructure that powers Amazon's cloud computing platform. 
-                  I'm passionate about creating scalable, reliable systems that serve millions of customers.
+                  the core networking infrastructure that powers Amazon&apos;s cloud computing platform. 
+                  I&apos;m passionate about creating scalable, reliable systems that serve millions of customers.
                 </p>
               </div>
               
@@ -79,7 +79,7 @@ export default function About() {
                 <h3>Passion</h3>
                 <p>
                   What excites me most is the opportunity to work on systems that impact millions of users worldwide. 
-                  Whether it's optimizing cloud infrastructure, building scalable services, or solving complex technical challenges, 
+                  Whether it&apos;s optimizing cloud infrastructure, building scalable services, or solving complex technical challenges, 
                   I love creating solutions that make a real difference.
                 </p>
               </div>
@@ -126,7 +126,7 @@ export default function About() {
                   </div>
                   <h4 className={styles.jobTitle}>Software Development Engineer</h4>
                   <p className={styles.jobDescription}>
-                    Working on the EC2 VPC team to build and maintain the core networking infrastructure that powers AWS's cloud computing platform.
+                    Working on the EC2 VPC team to build and maintain the core networking infrastructure that powers AWS&apos;s cloud computing platform.
                   </p>
                   <div className={styles.achievements}>
                     <h5>Key Responsibilities:</h5>
@@ -161,7 +161,7 @@ export default function About() {
                       <li>Developed features for local payments and currency acceptance</li>
                       <li>Worked on payment processing systems that handle millions of transactions</li>
                       <li>Collaborated with senior engineers on complex payment infrastructure</li>
-                      <li>Gained deep understanding of Amazon's payment systems and architecture</li>
+                      <li>Gained deep understanding of Amazon&apos;s payment systems and architecture</li>
                     </ul>
                   </div>
                 </div>

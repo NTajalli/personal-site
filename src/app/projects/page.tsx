@@ -188,7 +188,7 @@ export default function Projects() {
         <div className={styles.ctaSection}>
           <div className={styles.ctaCard}>
             <h3>Interested in Collaborating?</h3>
-            <p>I'm always open to discussing new opportunities and exciting projects.</p>
+            <p>I&apos;m always open to discussing new opportunities and exciting projects.</p>
             <div className={styles.ctaButtons}>
               <a href="/contact" className={styles.ctaBtnPrimary}>
                 Get In Touch

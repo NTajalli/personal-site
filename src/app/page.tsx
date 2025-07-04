@@ -27,7 +27,7 @@ export default function Home() {
       <div className={styles.heroSection}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <h1 className={styles.greeting}>Hi! I'm Noah</h1>
+            <h1 className={styles.greeting}>Hi! I&apos;m Noah</h1>
             <h2 className={styles.title}>I am a:</h2>
             <div className={styles.typeEffectContainer}>
               <TypeEffect words={words} />
@@ -71,7 +71,7 @@ export default function Home() {
             </div>
             <p>
               Bachelor of Science in Computer Science with a minor in Statistics from the University of Maryland, College Park. 
-              Specializing in cloud computing and distributed systems, I'm passionate about building scalable infrastructure 
+              Specializing in cloud computing and distributed systems, I&apos;m passionate about building scalable infrastructure 
               and solving complex technical challenges.
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function Home() {
             </div>
             <p>
               Software Development Engineer at AWS working on the EC2 VPC team, where I contribute to building and maintaining 
-              the core networking infrastructure that powers the cloud. I'm excited to continue growing and making an impact 
+              the core networking infrastructure that powers the cloud. I&apos;m excited to continue growing and making an impact 
               in the cloud computing space.
             </p>
           </div>
@@ -112,7 +112,7 @@ export default function Home() {
       <div className={styles.ctaSection}>
         <div className={styles.ctaCard}>
           <h3>Ready to Connect?</h3>
-          <p>Let's discuss how we can work together to bring your ideas to life.</p>
+          <p>Let&apos;s discuss how we can work together to bring your ideas to life.</p>
           <div className={styles.ctaButtons}>
             <a href="/projects" className={styles.ctaBtnPrimary}>
               View My Work

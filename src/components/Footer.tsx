@@ -108,7 +108,7 @@ const Footer = () => {
 
           {/* Newsletter/CTA Section */}
           <div className={styles.ctaSection}>
-            <h4 className={styles.sectionTitle}>Let's Connect</h4>
+            <h4 className={styles.sectionTitle}>Let&apos;s Connect</h4>
             <p className={styles.ctaText}>
               Interested in collaborating or just want to say hello?
             </p>
