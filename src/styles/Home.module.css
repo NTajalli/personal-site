@@ -1,0 +1,572 @@
+/* Modern Home Page Styles with Glassmorphism and Animations */
+
+.heroSection {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 30% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, rgba(0, 175, 255, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.heroContent {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.heroText {
+  animation: slideInFromLeft 0.8s ease;
+}
+
+.greeting {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--neon-blue);
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+
+.typeEffectContainer {
+  min-height: 3rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin: 0;
+  font-weight: 400;
+}
+
+.heroVisual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInFromRight 0.8s ease 0.2s both;
+}
+
+.floatingCard {
+  background: rgba(44, 47, 51, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  animation: float 6s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.floatingCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 175, 255, 0.1));
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.floatingCard:hover::before {
+  opacity: 1;
+}
+
+.cardContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.avatarPlaceholder {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--neon-blue), var(--dark-blue));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.avatarText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: black;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.statLabel {
+  display: block;
+  font-size: 0.8rem;
+  color: #ccc;
+  margin-top: 0.25rem;
+}
+
+/* Introduction Section */
+.introduction {
+  padding: 4rem 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.introGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+}
+
+.introCard {
+  background: rgba(44, 47, 51, 0.6);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.introCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 175, 255, 0.05));
+  border-radius: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.introCard:hover::before {
+  opacity: 1;
+}
+
+.introCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
+  border-color: rgba(0, 255, 255, 0.4);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cardIcon {
+  font-size: 2rem;
+}
+
+.cardHeader h3 {
+  color: var(--neon-blue);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+.introCard p {
+  color: white;
+  line-height: 1.6;
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Skills Section */
+.skillsSection {
+  padding: 4rem 0;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--neon-blue);
+  margin-bottom: 3rem;
+  font-weight: 600;
+  text-shadow: 0 0 15px var(--neon-blue);
+}
+
+.skillsGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 0 2rem;
+}
+
+.skillCard {
+  background: rgba(44, 47, 51, 0.7);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.skillCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.05), rgba(0, 175, 255, 0.05));
+  border-radius: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skillCard:hover::before {
+  opacity: 1;
+}
+
+.skillCard:hover {
+  transform: translateY(-5px);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 15px 30px rgba(0, 255, 255, 0.1);
+}
+
+.skillHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.skillIcon {
+  font-size: 1.5rem;
+}
+
+.skillName {
+  color: white;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.progressBar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-blue), var(--dark-blue));
+  border-radius: 4px;
+  transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.progressFill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+
+.skillLevel {
+  color: var(--neon-blue);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: right;
+  display: block;
+}
+
+/* CTA Section */
+.ctaSection {
+  padding: 4rem 0 6rem 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.ctaCard {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(44, 47, 51, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 3rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(0, 175, 255, 0.1));
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ctaCard:hover::before {
+  opacity: 1;
+}
+
+.ctaCard h3 {
+  color: var(--neon-blue);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 15px var(--neon-blue);
+}
+
+.ctaCard p {
+  color: white;
+  font-size: 1.1rem;
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaBtnPrimary,
+.ctaBtnSecondary {
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaBtnPrimary {
+  background: linear-gradient(135deg, var(--neon-blue), var(--dark-blue));
+  color: black;
+  border: none;
+}
+
+.ctaBtnPrimary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+}
+
+.ctaBtnSecondary {
+  background: transparent;
+  color: var(--neon-blue);
+  border: 2px solid var(--neon-blue);
+}
+
+.ctaBtnSecondary:hover {
+  background: var(--neon-blue);
+  color: black;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .greeting {
+    font-size: 2.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .floatingCard {
+    padding: 1.5rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .statNumber {
+    font-size: 1.5rem;
+  }
+
+  .statLabel {
+    font-size: 0.7rem;
+  }
+
+  .introGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .skillsGrid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .ctaCard {
+    margin: 0 1rem;
+    padding: 2rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ctaBtnPrimary,
+  .ctaBtnSecondary {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .greeting {
+    font-size: 2rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .floatingCard {
+    padding: 1rem;
+  }
+
+  .avatarPlaceholder {
+    width: 60px;
+    height: 60px;
+  }
+
+  .avatarText {
+    font-size: 1.4rem;
+  }
+
+  .statNumber {
+    font-size: 1.2rem;
+  }
+
+  .statLabel {
+    font-size: 0.6rem;
+  }
+} 

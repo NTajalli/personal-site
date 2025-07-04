@@ -1,0 +1,542 @@
+/* Modern Footer Styles with Glassmorphism and Professional Design */
+
+.footer {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.95), rgba(44, 47, 51, 0.98));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 3px solid rgba(0, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.2);
+  min-height: 200px;
+}
+
+/* Particle Background Effect */
+.particleBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--neon-blue);
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: float 8s infinite ease-in-out;
+}
+
+.particle:nth-child(1) {
+  top: 20%;
+  left: 10%;
+  animation-delay: 0s;
+  animation-duration: 10s;
+}
+
+.particle:nth-child(2) {
+  top: 60%;
+  left: 20%;
+  animation-delay: 2s;
+  animation-duration: 8s;
+}
+
+.particle:nth-child(3) {
+  top: 40%;
+  left: 80%;
+  animation-delay: 4s;
+  animation-duration: 12s;
+}
+
+.particle:nth-child(4) {
+  top: 80%;
+  left: 70%;
+  animation-delay: 6s;
+  animation-duration: 9s;
+}
+
+.particle:nth-child(5) {
+  top: 30%;
+  left: 50%;
+  animation-delay: 8s;
+  animation-duration: 11s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+    opacity: 0.2;
+  }
+  25% {
+    transform: translateY(-8px) translateX(3px);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-4px) translateX(-3px);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateY(-12px) translateX(2px);
+    opacity: 0.5;
+  }
+}
+
+/* Main Footer Content */
+.footerContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem 2rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 2rem;
+}
+
+/* Brand Section */
+.brandSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.brandInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.brandLogo {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--neon-blue);
+  text-shadow: 0 0 15px var(--neon-blue);
+  position: relative;
+  z-index: 2;
+}
+
+.logoGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+.brandName {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.brandTagline {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.socialLinks {
+  display: flex;
+  gap: 1rem;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(0, 255, 255, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.socialLink::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.socialLink:hover::before {
+  left: 100%;
+}
+
+.socialLink:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 255, 255, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.2);
+}
+
+.socialIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialEmoji {
+  font-size: 1rem;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.socialLink:hover .socialEmoji {
+  opacity: 1;
+}
+
+/* Section Styles */
+.linksSection,
+.contactSection,
+.ctaSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sectionTitle {
+  color: var(--neon-blue);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Quick Links */
+.quickLinks {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quickLink {
+  color: #ccc;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.quickLink::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--neon-blue);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.quickLink:hover {
+  color: white;
+  transform: translateX(5px);
+}
+
+.quickLink:hover::before {
+  opacity: 1;
+}
+
+/* Contact Information */
+.contactList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.contactIcon {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.contactLabel {
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.contactLink,
+.contactText {
+  color: #ccc;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.contactLink:hover {
+  color: var(--neon-blue);
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* CTA Section */
+.ctaText {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 1.5rem 0;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, var(--neon-blue), var(--dark-blue));
+  color: black;
+  text-decoration: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.ctaButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.ctaButton:hover::before {
+  left: 100%;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 255, 255, 0.3);
+}
+
+.btnIcon {
+  font-size: 1rem;
+}
+
+/* Footer Bottom */
+.footerBottom {
+  border-top: 1px solid rgba(0, 255, 255, 0.1);
+  padding: 1.5rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.bottomContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.copyright {
+  color: #999;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.separator {
+  color: var(--neon-blue);
+  opacity: 0.6;
+}
+
+.footerStats {
+  display: flex;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statNumber {
+  color: var(--neon-blue);
+  font-size: 1rem;
+  font-weight: 700;
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+.statLabel {
+  color: #999;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .brandSection {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .footerContent {
+    padding: 2rem 1rem 1.5rem;
+  }
+  
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .brandSection {
+    text-align: center;
+    align-items: center;
+  }
+  
+  .socialLinks {
+    justify-content: center;
+  }
+  
+  .bottomContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  
+  .footerStats {
+    justify-content: center;
+  }
+  
+  .copyright {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerContent {
+    padding: 1.5rem 1rem 1rem;
+  }
+  
+  .footerGrid {
+    gap: 1.5rem;
+  }
+  
+  .brandLogo {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .logoText {
+    font-size: 1.5rem;
+  }
+  
+  .logoGlow {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .brandName {
+    font-size: 1.3rem;
+  }
+  
+  .brandTagline {
+    font-size: 0.8rem;
+  }
+  
+  .socialLink {
+    padding: 0.6rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1rem;
+  }
+  
+  .quickLink,
+  .contactLink,
+  .contactText,
+  .ctaText {
+    font-size: 0.85rem;
+  }
+  
+  .footerStats {
+    gap: 1.5rem;
+  }
+  
+  .statNumber {
+    font-size: 0.9rem;
+  }
+  
+  .statLabel {
+    font-size: 0.65rem;
+  }
+  
+  .copyright {
+    font-size: 0.8rem;
+  }
+} 

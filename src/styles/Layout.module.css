@@ -1,0 +1,25 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px; /* Account for fixed navbar height */
+}
+
+.bodyContainer {
+  padding: 0 10%;
+  flex: 1;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 768px) {
+  .bodyContainer {
+    padding: 0 5%;
+  }
+} 

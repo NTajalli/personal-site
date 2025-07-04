@@ -1,0 +1,33 @@
+.typeEffect {
+  min-height: 50px;
+  max-height: 50px;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--neon-blue);
+  text-align: center;
+  padding: 10px;
+  margin: 0;
+  cursor: default;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor {
+  animation: blink 1s infinite;
+  color: var(--neon-blue);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 768px) {
+  .typeEffect {
+    font-size: 28px;
+    padding: 5px;
+  }
+} 
