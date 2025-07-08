@@ -1,12 +1,78 @@
+'use client';
+
 import Layout from '../../components/Layout';
 import styles from '../../styles/Contact.module.css';
+import { useEffect, useRef } from 'react';
+import { 
+  trackFormStart, 
+  trackFormFieldFocus, 
+  trackFormSubmit, 
+  trackEmailClick, 
+  trackPhoneClick, 
+  trackHeroSectionView,
+  trackExternalLink 
+} from '@/lib/analytics';
+import { useScrollTracking } from '@/lib/useScrollTracking';
+import { useTimeTracking } from '@/lib/useTimeTracking';
+import { useIntersectionTracking } from '@/lib/useIntersectionTracking';
 
 export default function Contact() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const detailsRef = useRef<HTMLDivElement>(null);
+  const formStarted = useRef<boolean>(false);
+
+  // Initialize tracking hooks
+  useScrollTracking({ page: 'contact' });
+  useTimeTracking({ page: 'contact' });
+  const { observe } = useIntersectionTracking({ page: 'contact' });
+
+  // Track section views using intersection observer
+  useEffect(() => {
+    if (heroRef.current) observe(heroRef.current, 'hero_section');
+    if (formRef.current) observe(formRef.current, 'contact_form');
+    if (detailsRef.current) observe(detailsRef.current, 'contact_details');
+  }, [observe]);
+
+  // Track hero section view on component mount
+  useEffect(() => {
+    trackHeroSectionView('contact');
+  }, []);
+
+  const handleFormStart = () => {
+    if (!formStarted.current) {
+      trackFormStart('contact_form');
+      formStarted.current = true;
+    }
+  };
+
+  const handleFieldFocus = (fieldName: string) => {
+    handleFormStart();
+    trackFormFieldFocus(fieldName, 'contact_form');
+  };
+
+  const handleFormSubmit = () => {
+    trackFormSubmit('contact_form');
+    // Allow form to submit normally
+  };
+
+  const handleEmailClick = () => {
+    trackEmailClick('contact_page');
+  };
+
+  const handlePhoneClick = () => {
+    trackPhoneClick('contact_page');
+  };
+
+  const handleLinkedInClick = () => {
+    trackExternalLink('https://linkedin.com/in/your-profile', 'LinkedIn Profile');
+  };
+
   return (
     <Layout>
       <div className={styles.contactPage}>
         {/* Hero Section */}
-        <div className={styles.heroSection}>
+        <div className={styles.heroSection} ref={heroRef}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>Get In Touch</h1>
             <p className={styles.heroSubtitle}>
@@ -41,9 +107,11 @@ export default function Contact() {
               </div>
               
               <form 
+                ref={formRef}
                 action="https://formsubmit.co/ntajal2829@gmail.com" 
                 method="POST"
                 className={styles.contactForm}
+                onSubmit={handleFormSubmit}
               >
                 <div className={styles.formRow}>
                   <div className={styles.formGroup}>
@@ -57,6 +125,7 @@ export default function Contact() {
                       required 
                       className={styles.formInput}
                       placeholder="Your full name"
+                      onFocus={() => handleFieldFocus('name')}
                     />
                   </div>
 
@@ -71,6 +140,7 @@ export default function Contact() {
                       required 
                       className={styles.formInput}
                       placeholder="your.email@example.com"
+                      onFocus={() => handleFieldFocus('email')}
                     />
                   </div>
                 </div>
@@ -86,6 +156,7 @@ export default function Contact() {
                     required 
                     className={styles.formInput}
                     placeholder="What&apos;s this about?"
+                    onFocus={() => handleFieldFocus('subject')}
                   />
                 </div>
 
@@ -100,6 +171,7 @@ export default function Contact() {
                     rows={6}
                     className={styles.formInput}
                     placeholder="Tell me about your project, opportunity, or just say hello!"
+                    onFocus={() => handleFieldFocus('message')}
                   ></textarea>
                 </div>
 
@@ -111,7 +183,7 @@ export default function Contact() {
           </div>
           
           {/* Contact Details Section */}
-          <div className={styles.detailsSection}>
+          <div className={styles.detailsSection} ref={detailsRef}>
             <div className={styles.detailsCard}>
               <h2 className={styles.detailsTitle}>Other Ways to Connect</h2>
               <p className={styles.detailsSubtitle}>
@@ -123,7 +195,7 @@ export default function Contact() {
                   <div className={styles.methodContent}>
                     <h3 className={styles.methodTitle}>Email</h3>
                     <p className={styles.methodDescription}>Perfect for detailed discussions</p>
-                    <a href="mailto:ntajal2829@gmail.com" className={styles.methodLink}>
+                    <a href="mailto:ntajal2829@gmail.com" className={styles.methodLink} onClick={handleEmailClick}>
                       ntajal2829@gmail.com
                     </a>
                   </div>
@@ -133,7 +205,7 @@ export default function Contact() {
                   <div className={styles.methodContent}>
                     <h3 className={styles.methodTitle}>Phone</h3>
                     <p className={styles.methodDescription}>Great for quick calls</p>
-                    <a href="tel:+12404790600" className={styles.methodLink}>
+                    <a href="tel:+12404790600" className={styles.methodLink} onClick={handlePhoneClick}>
                       (240) 479-0600
                     </a>
                   </div>
@@ -153,7 +225,7 @@ export default function Contact() {
                   <div className={styles.methodContent}>
                     <h3 className={styles.methodTitle}>LinkedIn</h3>
                     <p className={styles.methodDescription}>Professional networking</p>
-                    <a href="https://linkedin.com/in/your-profile" className={styles.methodLink} target="_blank" rel="noopener noreferrer">
+                    <a href="https://linkedin.com/in/your-profile" className={styles.methodLink} target="_blank" rel="noopener noreferrer" onClick={handleLinkedInClick}>
                       Connect on LinkedIn
                     </a>
                   </div>

@@ -1,6 +1,18 @@
+'use client';
+
 import Layout from '../components/Layout';
 import TypeEffect from '../components/TypeEffect';
 import styles from '../styles/Home.module.css';
+import { useEffect, useRef } from 'react';
+import { 
+  trackCTAClick, 
+  trackSkillView, 
+  trackHeroSectionView,
+  trackStatsView 
+} from '@/lib/analytics';
+import { useScrollTracking } from '@/lib/useScrollTracking';
+import { useTimeTracking } from '@/lib/useTimeTracking';
+import { useIntersectionTracking } from '@/lib/useIntersectionTracking';
 
 const words = [
   "Software Engineer", 
@@ -22,9 +34,44 @@ const skills = [
 ];
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  // Initialize tracking hooks
+  useScrollTracking({ page: 'home' });
+  useTimeTracking({ page: 'home' });
+  const { observe } = useIntersectionTracking({ page: 'home' });
+
+  // Track section views using intersection observer
+  useEffect(() => {
+    if (heroRef.current) observe(heroRef.current, 'hero_section');
+    if (skillsRef.current) observe(skillsRef.current, 'skills_section');
+    if (introRef.current) observe(introRef.current, 'introduction_section');
+    if (ctaRef.current) observe(ctaRef.current, 'cta_section');
+  }, [observe]);
+
+  // Track hero section view on component mount
+  useEffect(() => {
+    trackHeroSectionView('home');
+  }, []);
+
+  const handleCTAClick = (buttonText: string, destination: string) => {
+    trackCTAClick(buttonText, 'home', destination);
+  };
+
+  const handleSkillHover = (skillName: string, skillLevel: number) => {
+    trackSkillView(skillName, skillLevel);
+  };
+
+  const handleStatsView = () => {
+    trackStatsView('home', 'hero_stats');
+  };
+
   return (
     <Layout>
-      <div className={styles.heroSection}>
+      <div className={styles.heroSection} ref={heroRef}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <h1 className={styles.greeting}>Hi! I&apos;m Noah</h1>
@@ -43,7 +90,7 @@ export default function Home() {
                 <div className={styles.avatarPlaceholder}>
                   <span className={styles.avatarText}>NT</span>
                 </div>
-                <div className={styles.stats}>
+                <div className={styles.stats} onMouseEnter={handleStatsView}>
                   <div className={styles.stat}>
                     <span className={styles.statNumber}>4+</span>
                     <span className={styles.statLabel}>Years Experience</span>
@@ -63,7 +110,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.introduction}>
+      <div className={styles.introduction} ref={introRef}>
         <div className={styles.introGrid}>
           <div className={styles.introCard}>
             <div className={styles.cardHeader}>
@@ -89,11 +136,15 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.skillsSection}>
+      <div className={styles.skillsSection} ref={skillsRef}>
         <h2 className={styles.sectionTitle}>Technical Skills</h2>
         <div className={styles.skillsGrid}>
           {skills.map((skill, index) => (
-            <div key={index} className={styles.skillCard}>
+            <div 
+              key={index} 
+              className={styles.skillCard}
+              onMouseEnter={() => handleSkillHover(skill.name, skill.level)}
+            >
               <div className={styles.skillHeader}>
                 <span className={styles.skillName}>{skill.name}</span>
               </div>
@@ -109,15 +160,23 @@ export default function Home() {
         </div>
       </div>
 
-      <div className={styles.ctaSection}>
+      <div className={styles.ctaSection} ref={ctaRef}>
         <div className={styles.ctaCard}>
           <h3>Ready to Connect?</h3>
           <p>Let&apos;s discuss how we can work together to bring your ideas to life.</p>
           <div className={styles.ctaButtons}>
-            <a href="/projects" className={styles.ctaBtnPrimary}>
+            <a 
+              href="/projects" 
+              className={styles.ctaBtnPrimary}
+              onClick={() => handleCTAClick('View My Work', '/projects')}
+            >
               View My Work
             </a>
-            <a href="/contact" className={styles.ctaBtnSecondary}>
+            <a 
+              href="/contact" 
+              className={styles.ctaBtnSecondary}
+              onClick={() => handleCTAClick('Get In Touch', '/contact')}
+            >
               Get In Touch
             </a>
           </div>

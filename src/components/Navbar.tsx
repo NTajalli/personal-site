@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from '../styles/Navbar.module.css';
+import { trackNavigation, trackMobileMenuToggle } from '@/lib/analytics';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -40,11 +41,22 @@ const Navbar = () => {
   }, [pathname]);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    const newState = !isMenuOpen;
+    setIsMenuOpen(newState);
+    trackMobileMenuToggle(newState ? 'open' : 'close');
   };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+    trackMobileMenuToggle('close');
+  };
+
+  const handleNavClick = (destination: string, label: string) => {
+    trackNavigation(destination, `navbar_${label.toLowerCase()}`);
+  };
+
+  const handleBrandClick = () => {
+    trackNavigation('/', 'navbar_brand');
   };
 
   const isActive = (path: string) => {
@@ -80,7 +92,7 @@ const Navbar = () => {
         <div className={styles.container}>
           {/* Brand/Logo */}
           <div className={styles.brand}>
-            <Link href="/" className={styles.brandLink} onClick={closeMenu}>
+            <Link href="/" className={styles.brandLink} onClick={() => { closeMenu(); handleBrandClick(); }}>
               <span className={styles.brandText}>NT</span>
               <div className={styles.brandGlow}></div>
             </Link>
@@ -94,6 +106,7 @@ const Navbar = () => {
                   <Link
                     href={link.href}
                     className={`${styles.navLink} ${isActive(link.href) ? styles.active : ''}`}
+                    onClick={() => handleNavClick(link.href, link.label)}
                   >
                     <span className={styles.linkText}>{link.label}</span>
                     <div className={styles.linkUnderline}></div>
@@ -158,7 +171,7 @@ const Navbar = () => {
                 <Link
                   href={link.href}
                   className={`${styles.mobileLink} ${isActive(link.href) ? styles.active : ''}`}
-                  onClick={closeMenu}
+                  onClick={() => { closeMenu(); handleNavClick(link.href, `mobile_${link.label}`); }}
                 >
                   <span className={styles.mobileLinkText}>{link.label}</span>
                 </Link>

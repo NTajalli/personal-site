@@ -1,5 +1,20 @@
+'use client';
+
 import Layout from '../../components/Layout';
 import styles from '../../styles/Projects.module.css';
+import { useEffect, useRef } from 'react';
+import { 
+  trackProjectView, 
+  trackProjectDemo, 
+  trackProjectCode,
+  trackTechStackClick,
+  trackCTAClick,
+  trackHeroSectionView,
+  trackGitHubClick 
+} from '@/lib/analytics';
+import { useScrollTracking } from '@/lib/useScrollTracking';
+import { useTimeTracking } from '@/lib/useTimeTracking';
+import { useIntersectionTracking } from '@/lib/useIntersectionTracking';
 
 const projects = [
   {
@@ -47,11 +62,58 @@ export default function Projects() {
   const featuredProjects = projects.filter(project => project.featured);
   const otherProjects = projects.filter(project => !project.featured);
 
+  const heroRef = useRef<HTMLDivElement>(null);
+  const featuredRef = useRef<HTMLDivElement>(null);
+  const otherRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+
+  // Initialize tracking hooks
+  useScrollTracking({ page: 'projects' });
+  useTimeTracking({ page: 'projects' });
+  const { observe } = useIntersectionTracking({ page: 'projects' });
+
+  // Track section views using intersection observer
+  useEffect(() => {
+    if (heroRef.current) observe(heroRef.current, 'hero_section');
+    if (featuredRef.current) observe(featuredRef.current, 'featured_projects');
+    if (otherRef.current) observe(otherRef.current, 'other_projects');
+    if (ctaRef.current) observe(ctaRef.current, 'cta_section');
+  }, [observe]);
+
+  // Track hero section view on component mount
+  useEffect(() => {
+    trackHeroSectionView('projects');
+  }, []);
+
+  const handleProjectView = (projectName: string, category: string) => {
+    trackProjectView(projectName, category);
+  };
+
+  const handleProjectDemo = (projectName: string, demoUrl: string) => {
+    trackProjectDemo(projectName, demoUrl);
+  };
+
+  const handleProjectCode = (projectName: string, githubUrl: string) => {
+    trackProjectCode(projectName, githubUrl);
+  };
+
+  const handleTechStackClick = (technology: string, projectName: string) => {
+    trackTechStackClick(technology, projectName);
+  };
+
+  const handleCTAClick = (buttonText: string, destination: string) => {
+    if (destination.includes('github.com')) {
+      trackGitHubClick('projects_cta');
+    } else {
+      trackCTAClick(buttonText, 'projects', destination);
+    }
+  };
+
   return (
     <Layout>
       <div className={styles.projectsPage}>
         {/* Hero Section */}
-        <div className={styles.heroSection}>
+        <div className={styles.heroSection} ref={heroRef}>
           <div className={styles.heroContent}>
             <h1 className={styles.heroTitle}>My Projects</h1>
             <p className={styles.heroSubtitle}>
@@ -75,12 +137,16 @@ export default function Projects() {
         </div>
 
         {/* Featured Projects */}
-        <div className={styles.featuredSection}>
+        <div className={styles.featuredSection} ref={featuredRef}>
           <div className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>Featured Projects</h2>
             <div className={styles.featuredGrid}>
               {featuredProjects.map((project) => (
-                <div key={project.id} className={styles.featuredCard}>
+                <div 
+                  key={project.id} 
+                  className={styles.featuredCard}
+                  onMouseEnter={() => handleProjectView(project.title, project.category)}
+                >
                   <div className={styles.cardHeader}>
                     <div className={styles.projectMeta}>
                       <span className={styles.projectCategory}>{project.category}</span>
@@ -94,7 +160,11 @@ export default function Projects() {
                     <h4>Technologies Used:</h4>
                     <div className={styles.techTags}>
                       {project.technologies.map((tech, index) => (
-                        <span key={index} className={styles.techTag}>
+                        <span 
+                          key={index} 
+                          className={styles.techTag}
+                          onClick={() => handleTechStackClick(tech, project.title)}
+                        >
                           {tech}
                         </span>
                       ))}
@@ -108,6 +178,7 @@ export default function Projects() {
                         className={styles.actionBtn}
                         target="_blank" 
                         rel="noopener noreferrer"
+                        onClick={() => handleProjectDemo(project.title, project.liveUrl)}
                       >
                         Live Demo
                       </a>
@@ -117,6 +188,7 @@ export default function Projects() {
                       className={styles.actionBtn}
                       target="_blank" 
                       rel="noopener noreferrer"
+                      onClick={() => handleProjectCode(project.title, project.githubUrl)}
                     >
                       View Code
                     </a>
@@ -129,12 +201,16 @@ export default function Projects() {
 
         {/* Other Projects */}
         {otherProjects.length > 0 && (
-          <div className={styles.otherSection}>
+          <div className={styles.otherSection} ref={otherRef}>
             <div className={styles.sectionContainer}>
               <h2 className={styles.sectionTitle}>Other Projects</h2>
               <div className={styles.otherGrid}>
                 {otherProjects.map((project) => (
-                  <div key={project.id} className={styles.otherCard}>
+                  <div 
+                    key={project.id} 
+                    className={styles.otherCard}
+                    onMouseEnter={() => handleProjectView(project.title, project.category)}
+                  >
                     <div className={styles.cardHeader}>
                       <div className={styles.projectMeta}>
                         <span className={styles.projectCategory}>{project.category}</span>
@@ -147,7 +223,11 @@ export default function Projects() {
                     <div className={styles.techStack}>
                       <div className={styles.techTags}>
                         {project.technologies.slice(0, 4).map((tech, index) => (
-                          <span key={index} className={styles.techTag}>
+                          <span 
+                            key={index} 
+                            className={styles.techTag}
+                            onClick={() => handleTechStackClick(tech, project.title)}
+                          >
                             {tech}
                           </span>
                         ))}
@@ -164,6 +244,7 @@ export default function Projects() {
                           className={styles.actionBtn}
                           target="_blank" 
                           rel="noopener noreferrer"
+                          onClick={() => handleProjectDemo(project.title, project.liveUrl)}
                         >
                           Live Demo
                         </a>
@@ -173,6 +254,7 @@ export default function Projects() {
                         className={styles.actionBtn}
                         target="_blank" 
                         rel="noopener noreferrer"
+                        onClick={() => handleProjectCode(project.title, project.githubUrl)}
                       >
                         View Code
                       </a>
@@ -185,15 +267,25 @@ export default function Projects() {
         )}
 
         {/* CTA Section */}
-        <div className={styles.ctaSection}>
+        <div className={styles.ctaSection} ref={ctaRef}>
           <div className={styles.ctaCard}>
             <h3>Interested in Collaborating?</h3>
             <p>I&apos;m always open to discussing new opportunities and exciting projects.</p>
             <div className={styles.ctaButtons}>
-              <a href="/contact" className={styles.ctaBtnPrimary}>
+              <a 
+                href="/contact" 
+                className={styles.ctaBtnPrimary}
+                onClick={() => handleCTAClick('Get In Touch', '/contact')}
+              >
                 Get In Touch
               </a>
-              <a href="https://github.com/NTajalli" className={styles.ctaBtnSecondary} target="_blank" rel="noopener noreferrer">
+              <a 
+                href="https://github.com/NTajalli" 
+                className={styles.ctaBtnSecondary} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                onClick={() => handleCTAClick('View GitHub', 'https://github.com/NTajalli')}
+              >
                 View GitHub
               </a>
             </div>

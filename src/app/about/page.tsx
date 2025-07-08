@@ -1,6 +1,19 @@
+'use client';
+
 import Layout from '../../components/Layout';
 import Image from 'next/image';
 import styles from '../../styles/About.module.css';
+import { useEffect, useRef } from 'react';
+import { 
+  trackWorkExperienceView, 
+  trackWorkExperienceClick, 
+  trackSkillCategoryView, 
+  trackHeroSectionView,
+  trackStatsView 
+} from '@/lib/analytics';
+import { useScrollTracking } from '@/lib/useScrollTracking';
+import { useTimeTracking } from '@/lib/useTimeTracking';
+import { useIntersectionTracking } from '@/lib/useIntersectionTracking';
 
 const skills = [
   { category: "Programming Languages", items: ["Python", "JavaScript/TypeScript", "C/C++", "Java", "Go"] },
@@ -11,11 +24,46 @@ const skills = [
 ];
 
 export default function About() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const experienceRef = useRef<HTMLDivElement>(null);
+
+  // Initialize tracking hooks
+  useScrollTracking({ page: 'about' });
+  useTimeTracking({ page: 'about' });
+  const { observe } = useIntersectionTracking({ page: 'about' });
+
+  // Track section views using intersection observer
+  useEffect(() => {
+    if (heroRef.current) observe(heroRef.current, 'hero_section');
+    if (aboutRef.current) observe(aboutRef.current, 'about_section');
+    if (skillsRef.current) observe(skillsRef.current, 'skills_section');
+    if (experienceRef.current) observe(experienceRef.current, 'experience_section');
+  }, [observe]);
+
+  // Track hero section view on component mount
+  useEffect(() => {
+    trackHeroSectionView('about');
+  }, []);
+
+  const handleWorkExperienceClick = (company: string, position: string) => {
+    trackWorkExperienceClick(company, position);
+  };
+
+  const handleSkillCategoryView = (category: string, skillCount: number) => {
+    trackSkillCategoryView(category, skillCount);
+  };
+
+  const handleStatsView = () => {
+    trackStatsView('about', 'hero_stats');
+  };
+
   return (
     <Layout>
       <div className={styles.aboutPage}>
         {/* Hero Section */}
-        <div className={styles.heroSection}>
+        <div className={styles.heroSection} ref={heroRef}>
           <div className={styles.heroContent}>
             <div className={styles.headshotContainer}>
               <div className={styles.headshotWrapper}>
@@ -34,7 +82,7 @@ export default function About() {
               <p className={styles.heroSubtitle}>
                 Software Development Engineer at AWS • UMD Graduate
               </p>
-              <div className={styles.heroStats}>
+              <div className={styles.heroStats} onMouseEnter={handleStatsView}>
                 <div className={styles.stat}>
                   <span className={styles.statNumber}>22</span>
                   <span className={styles.statLabel}>Years Old</span>
@@ -53,7 +101,7 @@ export default function About() {
         </div>
 
         {/* About Me Section */}
-        <div className={styles.aboutSection}>
+        <div className={styles.aboutSection} ref={aboutRef}>
           <div className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>About Me</h2>
             <div className={styles.aboutGrid}>
@@ -88,12 +136,16 @@ export default function About() {
         </div>
 
         {/* Skills Section */}
-        <div className={styles.skillsSection}>
+        <div className={styles.skillsSection} ref={skillsRef}>
           <div className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>Technical Skills</h2>
             <div className={styles.skillsGrid}>
               {skills.map((skillGroup, index) => (
-                <div key={index} className={styles.skillGroup}>
+                <div 
+                  key={index} 
+                  className={styles.skillGroup}
+                  onMouseEnter={() => handleSkillCategoryView(skillGroup.category, skillGroup.items.length)}
+                >
                   <h3 className={styles.skillCategory}>{skillGroup.category}</h3>
                   <div className={styles.skillItems}>
                     {skillGroup.items.map((skill, skillIndex) => (
@@ -109,11 +161,15 @@ export default function About() {
         </div>
 
         {/* Work Experience Timeline */}
-        <div className={styles.experienceSection}>
+        <div className={styles.experienceSection} ref={experienceRef}>
           <div className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>Work Experience</h2>
             <div className={styles.timeline}>
-              <div className={styles.timelineItem}>
+              <div 
+                className={styles.timelineItem}
+                onClick={() => handleWorkExperienceClick('Amazon Web Services (AWS)', 'Software Development Engineer')}
+                onMouseEnter={() => trackWorkExperienceView('Amazon Web Services (AWS)', 'Software Development Engineer')}
+              >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
                   <div className={styles.markerLine}></div>
@@ -140,7 +196,11 @@ export default function About() {
                 </div>
               </div>
 
-              <div className={styles.timelineItem}>
+              <div 
+                className={styles.timelineItem}
+                onClick={() => handleWorkExperienceClick('Amazon', 'Software Development Engineer Intern')}
+                onMouseEnter={() => trackWorkExperienceView('Amazon', 'Software Development Engineer Intern')}
+              >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
                   <div className={styles.markerLine}></div>
@@ -167,7 +227,11 @@ export default function About() {
                 </div>
               </div>
 
-              <div className={styles.timelineItem}>
+              <div 
+                className={styles.timelineItem}
+                onClick={() => handleWorkExperienceClick('Capital One', 'Software Engineering Intern (TIP)')}
+                onMouseEnter={() => trackWorkExperienceView('Capital One', 'Software Engineering Intern (TIP)')}
+              >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
                   <div className={styles.markerLine}></div>

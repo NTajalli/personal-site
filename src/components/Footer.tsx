@@ -1,9 +1,30 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Footer.module.css';
+import { trackSocialClick, trackNavigation, trackCTAClick, trackEmailClick, trackPhoneClick } from '@/lib/analytics';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const handleSocialClick = (platform: string) => {
+    trackSocialClick(platform, 'footer');
+  };
+
+  const handleQuickLinkClick = (path: string, name: string) => {
+    trackNavigation(path, `footer_${name.toLowerCase()}`);
+  };
+
+  const handleCTAClick = () => {
+    trackCTAClick('Get In Touch', 'footer', '/contact');
+  };
+
+  const handleContactClick = (method: string) => {
+    if (method === 'email') {
+      trackEmailClick('footer');
+    } else if (method === 'phone') {
+      trackPhoneClick('footer');
+    }
+  };
 
   const socialLinks = [
     {
@@ -57,6 +78,7 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className={styles.socialLink}
                   aria-label={social.name}
+                  onClick={() => handleSocialClick(social.name)}
                 >
                   <div className={styles.socialIcon}>
                     <Image 
@@ -77,7 +99,7 @@ const Footer = () => {
             <ul className={styles.quickLinks}>
               {quickLinks.map((link, index) => (
                 <li key={index}>
-                  <Link href={link.path} className={styles.quickLink}>
+                  <Link href={link.path} className={styles.quickLink} onClick={() => handleQuickLinkClick(link.path, link.name)}>
                     {link.name}
                   </Link>
                 </li>
@@ -94,7 +116,7 @@ const Footer = () => {
                   <div className={styles.contactDetails}>
                     <span className={styles.contactLabel}>{contact.label}</span>
                     {contact.link ? (
-                      <a href={contact.link} className={styles.contactLink}>
+                      <a href={contact.link} className={styles.contactLink} onClick={() => handleContactClick(contact.label.toLowerCase())}>
                         {contact.value}
                       </a>
                     ) : (
@@ -112,7 +134,7 @@ const Footer = () => {
             <p className={styles.ctaText}>
               Interested in collaborating or just want to say hello?
             </p>
-            <Link href="/contact" className={styles.ctaButton}>
+            <Link href="/contact" className={styles.ctaButton} onClick={handleCTAClick}>
               Get In Touch
             </Link>
           </div>
