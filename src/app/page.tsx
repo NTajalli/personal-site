@@ -4,11 +4,12 @@ import Layout from '../components/Layout';
 import TypeEffect from '../components/TypeEffect';
 import styles from '../styles/Home.module.css';
 import { useEffect, useRef } from 'react';
-import { 
-  trackCTAClick, 
-  trackSkillView, 
+import {
+  trackCTAClick,
+  trackSkillView,
   trackHeroSectionView,
-  trackStatsView 
+  trackStatsView,
+  trackTypeEffectComplete
 } from '@/lib/analytics';
 import { useScrollTracking } from '@/lib/useScrollTracking';
 import { useTimeTracking } from '@/lib/useTimeTracking';
@@ -38,6 +39,7 @@ export default function Home() {
   const skillsRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
+  const typeEffectCompleted = useRef(false);
 
   // Initialize tracking hooks
   useScrollTracking({ page: 'home' });
@@ -69,6 +71,13 @@ export default function Home() {
     trackStatsView('home', 'hero_stats');
   };
 
+  const handleTypeEffectComplete = () => {
+    if (!typeEffectCompleted.current) {
+      typeEffectCompleted.current = true;
+      trackTypeEffectComplete('home');
+    }
+  };
+
   return (
     <Layout>
       <div className={styles.heroSection} ref={heroRef}>
@@ -77,7 +86,7 @@ export default function Home() {
             <h1 className={styles.greeting}>Hi! I&apos;m Noah</h1>
             <h2 className={styles.title}>I am a:</h2>
             <div className={styles.typeEffectContainer}>
-              <TypeEffect words={words} />
+              <TypeEffect words={words} onCycleComplete={handleTypeEffectComplete} />
             </div>
             <p className={styles.subtitle}>
               Software Development Engineer at AWS • UMD Graduate
@@ -100,7 +109,7 @@ export default function Home() {
                     <span className={styles.statLabel}>Projects</span>
                   </div>
                   <div className={styles.stat}>
-                    <span className={styles.statNumber}>3</span>
+                    <span className={styles.statNumber}>4</span>
                     <span className={styles.statLabel}>Internships</span>
                   </div>
                 </div>
@@ -128,9 +137,9 @@ export default function Home() {
               <h3>Current Role</h3>
             </div>
             <p>
-              Software Development Engineer at AWS working on the EC2 VPC team, where I contribute to building and maintaining 
-              the core networking infrastructure that powers the cloud. I&apos;m excited to continue growing and making an impact 
-              in the cloud computing space.
+              Software Development Engineer on AWS&apos;s EC2 Networking/VPC Control Plane team, where I help operate the
+              system of record for every EC2 network interface, IP allocation, and instance-launch networking operation
+              across 40+ AWS regions.
             </p>
           </div>
         </div>

@@ -16,11 +16,12 @@ import { useTimeTracking } from '@/lib/useTimeTracking';
 import { useIntersectionTracking } from '@/lib/useIntersectionTracking';
 
 const skills = [
-  { category: "Programming Languages", items: ["Python", "JavaScript/TypeScript", "C/C++", "Java", "Go"] },
-  { category: "Cloud & Infrastructure", items: ["AWS (EC2, VPC, Lambda, S3)", "Cloud Computing", "Distributed Systems", "Networking", "Microservices"] },
-  { category: "Web Technologies", items: ["React/Next.js", "Node.js", "HTML/CSS", "REST APIs", "GraphQL"] },
-  { category: "DevOps & Tools", items: ["Docker", "Git", "CI/CD", "Linux", "AWS CLI"] },
-  { category: "Databases & Storage", items: ["DynamoDB", "RDS", "S3", "ElastiCache", "Data Modeling"] }
+  { category: "Programming Languages", items: ["Java", "Python", "JavaScript/TypeScript", "C/C++", "C#", "Ruby", "Scala", "Rust", "SQL"] },
+  { category: "Cloud & Infrastructure", items: ["AWS (EC2, Lambda, S3, DynamoDB, SNS, SQS, ECS, Step Functions)", "MySQL", "Distributed Systems", "Networking", "Concurrency Control"] },
+  { category: "Web Technologies", items: ["React/Next.js", "TypeScript", "HTML/CSS", "REST APIs"] },
+  { category: "Testing & Quality", items: ["Jest", "Cypress", "Unit, Component & End-to-End Testing"] },
+  { category: "AI & Agentic Development", items: ["Claude Code / Codex", "Agentic Development", "Machine Learning"] },
+  { category: "Tools & Practices", items: ["Git", "Agile Methodology", "Confluence", "Jira", "Splunk", "Linux"] }
 ];
 
 export default function About() {
@@ -165,10 +166,10 @@ export default function About() {
           <div className={styles.sectionContainer}>
             <h2 className={styles.sectionTitle}>Work Experience</h2>
             <div className={styles.timeline}>
-              <div 
+              <div
                 className={styles.timelineItem}
-                onClick={() => handleWorkExperienceClick('Amazon Web Services (AWS)', 'Software Development Engineer')}
-                onMouseEnter={() => trackWorkExperienceView('Amazon Web Services (AWS)', 'Software Development Engineer')}
+                onClick={() => handleWorkExperienceClick('Amazon Web Services (AWS)', 'Software Development Engineer, EC2 Networking/VPC Control Plane')}
+                onMouseEnter={() => trackWorkExperienceView('Amazon Web Services (AWS)', 'Software Development Engineer, EC2 Networking/VPC Control Plane')}
               >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
@@ -177,29 +178,31 @@ export default function About() {
                 <div className={styles.timelineContent}>
                   <div className={styles.jobHeader}>
                     <h3 className={styles.companyName}>Amazon Web Services (AWS)</h3>
-                    <span className={styles.location}>Seattle, WA</span>
-                    <span className={styles.duration}>July 2025 - Present</span>
+                    <span className={styles.location}>Arlington, VA</span>
+                    <span className={styles.duration}>June 2025 - Present</span>
                   </div>
-                  <h4 className={styles.jobTitle}>Software Development Engineer</h4>
+                  <h4 className={styles.jobTitle}>Software Development Engineer, EC2 Networking/VPC Control Plane</h4>
                   <p className={styles.jobDescription}>
-                    Working on the EC2 VPC team to build and maintain the core networking infrastructure that powers AWS&apos;s cloud computing platform.
+                    Core infrastructure engineer owning the system-of-record for EC2 network interface lifecycle, IP management, and
+                    instance-launch networking — every EC2 launch, ENI attachment, Elastic IP, and Load Balancer operation in AWS
+                    transits this service across 40+ regions.
                   </p>
                   <div className={styles.achievements}>
                     <h5>Key Responsibilities:</h5>
                     <ul>
-                      <li>Developing and maintaining core VPC networking infrastructure</li>
-                      <li>Working on distributed systems that serve millions of customers</li>
-                      <li>Collaborating with cross-functional teams to deliver reliable cloud services</li>
-                      <li>Contributing to the scalability and performance of AWS networking</li>
+                      <li>Architected a cell-based sharding migration for the control plane spanning 40+ AWS regions, reducing the blast radius of zone-level failures from full-AZ to sub-zone cells and enabling faster incident recovery for a service on the critical path of every EC2 instance launch</li>
+                      <li>Built a Java data-partitioning tool that splits multi-terabyte MySQL databases into isolated, cell-scoped replicas with dry-run validation and zero-downtime bootstrap, used in production to stand up new shards without impacting the millions of networking mutations processed daily at sub-100ms P99</li>
+                      <li>Implemented strongly consistent distributed reads across the sharded topology via scatter-gather routing, migrating 45+ API paths to enforce cell-level transaction isolation and building fleet-wide rollback tooling for safe reversibility during the multi-month migration</li>
+                      <li>Owned CloudFormation resource provider reliability for EC2 network resources across all 4 AWS partitions (commercial, GovCloud, China, isolated), building automated contract testing and canary infrastructure while shipping customer-requested features end-to-end</li>
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div 
+              <div
                 className={styles.timelineItem}
-                onClick={() => handleWorkExperienceClick('Amazon', 'Software Development Engineer Intern')}
-                onMouseEnter={() => trackWorkExperienceView('Amazon', 'Software Development Engineer Intern')}
+                onClick={() => handleWorkExperienceClick('Amazon', 'Software Development Engineering Intern')}
+                onMouseEnter={() => trackWorkExperienceView('Amazon', 'Software Development Engineering Intern')}
               >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
@@ -208,29 +211,27 @@ export default function About() {
                 <div className={styles.timelineContent}>
                   <div className={styles.jobHeader}>
                     <h3 className={styles.companyName}>Amazon</h3>
-                    <span className={styles.location}>Seattle, WA</span>
-                    <span className={styles.duration}>September 2024 - December 2024</span>
+                    <span className={styles.location}>Arlington, VA</span>
+                    <span className={styles.duration}>August 2024 - November 2024</span>
                   </div>
-                  <h4 className={styles.jobTitle}>Software Development Engineer Intern</h4>
+                  <h4 className={styles.jobTitle}>Software Development Engineering Intern</h4>
                   <p className={styles.jobDescription}>
-                    Interned on the payments team working on local payments and currency acceptance systems.
+                    Interned on the payments team, expanding local payment method coverage for Prime Video, Amazon Music, and Kindle.
                   </p>
                   <div className={styles.achievements}>
                     <h5>Key Achievements:</h5>
                     <ul>
-                      <li>Developed features for local payments and currency acceptance</li>
-                      <li>Worked on payment processing systems that handle millions of transactions</li>
-                      <li>Collaborated with senior engineers on complex payment infrastructure</li>
-                      <li>Gained deep understanding of Amazon&apos;s payment systems and architecture</li>
+                      <li>Expanded payment method coverage for Prime Video, Amazon Music, and Kindle across 26 countries by integrating 7 new local payment methods, improving checkout accessibility for 200M+ customers</li>
+                      <li>Extended the LPCA payment processing service by implementing a new Lambda handler with retry logic, improving fault tolerance and adding a new processing dimension to the distributed payments pipeline</li>
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div 
+              <div
                 className={styles.timelineItem}
-                onClick={() => handleWorkExperienceClick('Capital One', 'Software Engineering Intern (TIP)')}
-                onMouseEnter={() => trackWorkExperienceView('Capital One', 'Software Engineering Intern (TIP)')}
+                onClick={() => handleWorkExperienceClick('Capital One', 'Software Engineering Intern')}
+                onMouseEnter={() => trackWorkExperienceView('Capital One', 'Software Engineering Intern')}
               >
                 <div className={styles.timelineMarker}>
                   <div className={styles.markerDot}></div>
@@ -242,7 +243,7 @@ export default function About() {
                     <span className={styles.location}>McLean, VA</span>
                     <span className={styles.duration}>June 2024 - August 2024</span>
                   </div>
-                  <h4 className={styles.jobTitle}>Software Engineering Intern (TIP)</h4>
+                  <h4 className={styles.jobTitle}>Software Engineering Intern</h4>
                   <p className={styles.jobDescription}>
                     Developed an Admin Console UI using React and TypeScript for campaign recovery on the Portfolio 
                     Decisioning project, saving the company potentially millions in revenue monthly.

@@ -55,6 +55,15 @@ const projects = [
     category: "Systems Programming",
     githubUrl: "https://github.com/NTajalli/MicroCamlEvaluator",
     featured: false
+  },
+  {
+    id: 5,
+    title: "Smart Kitchen Manager",
+    description: "A cross-platform iOS/Android app that tracks pantry and fridge inventory via barcode scanning and receipt parsing, generating AI-powered recipe recommendations and grocery lists based on current stock and dietary preferences. Targeting an App Store launch with a freemium subscription model.",
+    technologies: ["React Native", "Supabase", "Claude", "AI/ML"],
+    category: "Mobile Development",
+    featured: true,
+    inProgress: true
   }
 ];
 
@@ -173,25 +182,30 @@ export default function Projects() {
                   
                   <div className={styles.projectActions}>
                     {project.liveUrl && (
-                      <a 
-                        href={project.liveUrl} 
+                      <a
+                        href={project.liveUrl}
                         className={styles.actionBtn}
-                        target="_blank" 
+                        target="_blank"
                         rel="noopener noreferrer"
-                        onClick={() => handleProjectDemo(project.title, project.liveUrl)}
+                        onClick={() => handleProjectDemo(project.title, project.liveUrl!)}
                       >
                         Live Demo
                       </a>
                     )}
-                    <a 
-                      href={project.githubUrl} 
-                      className={styles.actionBtn}
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      onClick={() => handleProjectCode(project.title, project.githubUrl)}
-                    >
-                      View Code
-                    </a>
+                    {project.githubUrl && (
+                      <a
+                        href={project.githubUrl}
+                        className={styles.actionBtn}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => handleProjectCode(project.title, project.githubUrl!)}
+                      >
+                        View Code
+                      </a>
+                    )}
+                    {project.inProgress && !project.liveUrl && !project.githubUrl && (
+                      <span className={styles.techTag}>In Development</span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -239,25 +253,30 @@ export default function Projects() {
                     
                     <div className={styles.projectActions}>
                       {project.liveUrl && (
-                        <a 
-                          href={project.liveUrl} 
+                        <a
+                          href={project.liveUrl}
                           className={styles.actionBtn}
-                          target="_blank" 
+                          target="_blank"
                           rel="noopener noreferrer"
-                          onClick={() => handleProjectDemo(project.title, project.liveUrl)}
+                          onClick={() => handleProjectDemo(project.title, project.liveUrl!)}
                         >
                           Live Demo
                         </a>
                       )}
-                      <a 
-                        href={project.githubUrl} 
-                        className={styles.actionBtn}
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        onClick={() => handleProjectCode(project.title, project.githubUrl)}
-                      >
-                        View Code
-                      </a>
+                      {project.githubUrl && (
+                        <a
+                          href={project.githubUrl}
+                          className={styles.actionBtn}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => handleProjectCode(project.title, project.githubUrl!)}
+                        >
+                          View Code
+                        </a>
+                      )}
+                      {project.inProgress && !project.liveUrl && !project.githubUrl && (
+                        <span className={styles.techTag}>In Development</span>
+                      )}
                     </div>
                   </div>
                 ))}

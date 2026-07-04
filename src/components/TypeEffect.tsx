@@ -8,13 +8,15 @@ interface TypeEffectProps {
   typeSpeed?: number;
   deleteSpeed?: number;
   delaySpeed?: number;
+  onCycleComplete?: () => void; // Called once per full pass through all words
 }
 
-const TypeEffect = ({ 
-  words, 
-  typeSpeed = 100, 
-  deleteSpeed = 100, 
-  delaySpeed = 1000 
+const TypeEffect = ({
+  words,
+  typeSpeed = 100,
+  deleteSpeed = 100,
+  delaySpeed = 1000,
+  onCycleComplete
 }: TypeEffectProps) => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentText, setCurrentText] = useState('');
@@ -47,10 +49,16 @@ const TypeEffect = ({
       } else {
         // Finished deleting, move to next word
         setIsDeleting(false);
-        setCurrentWordIndex((prev) => (prev + 1) % words.length);
+        setCurrentWordIndex((prev) => {
+          const next = (prev + 1) % words.length;
+          if (next === 0) {
+            onCycleComplete?.();
+          }
+          return next;
+        });
       }
     }
-  }, [currentText, isDeleting, currentWordIndex, words, typeSpeed, deleteSpeed, delaySpeed]);
+  }, [currentText, isDeleting, currentWordIndex, words, typeSpeed, deleteSpeed, delaySpeed, onCycleComplete]);
 
   return (
     <div className={styles.typeEffect}>

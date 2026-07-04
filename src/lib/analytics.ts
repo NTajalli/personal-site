@@ -13,17 +13,6 @@ export const GA_TRACKING_ID = "G-ECECEBQKW1";
 // Check if we have a tracking ID
 export const isGAEnabled = !!GA_TRACKING_ID;
 
-// Initialize Google Analytics
-export const initGA = () => {
-  if (!isGAEnabled) return;
-
-  // Configure gtag
-  window.gtag('config', GA_TRACKING_ID, {
-    page_title: document.title,
-    page_location: window.location.href,
-  });
-};
-
 // Track page views
 export const trackPageView = (url: string) => {
   if (!isGAEnabled) return;
@@ -173,6 +162,15 @@ export const trackStatsView = (location: string, statsType: string) => {
 // SECTION TRACKING
 export const trackSectionView = (sectionName: string, page: string) => {
   trackEvent('view', 'section', `${sectionName} - ${page}`);
+};
+
+export const trackSectionDwell = (sectionName: string, page: string, durationSeconds: number) => {
+  trackEvent('dwell', 'section_engagement', `${sectionName} - ${page}`, durationSeconds);
+};
+
+// OUTBOUND ENGAGEMENT TRACKING
+export const trackOutboundReturn = (linkLabel: string, awaySeconds: number) => {
+  trackEvent('outbound_return', 'engagement', linkLabel, awaySeconds);
 };
 
 // PERFORMANCE TRACKING

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from '../styles/Navbar.module.css';
-import { trackNavigation, trackMobileMenuToggle } from '@/lib/analytics';
+import { trackNavigation, trackMobileMenuToggle, trackDownload } from '@/lib/analytics';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,8 +47,10 @@ const Navbar = () => {
   };
 
   const closeMenu = () => {
+    if (isMenuOpen) {
+      trackMobileMenuToggle('close');
+    }
     setIsMenuOpen(false);
-    trackMobileMenuToggle('close');
   };
 
   const handleNavClick = (destination: string, label: string) => {
@@ -59,10 +61,11 @@ const Navbar = () => {
     trackNavigation('/', 'navbar_brand');
   };
 
+  const handleResumeDownload = () => {
+    trackDownload('Noah Tajalli Resume', 'pdf');
+  };
+
   const isActive = (path: string) => {
-    // Debug: log the current pathname and path being compared
-    console.log('Current pathname:', pathname, 'Comparing with:', path);
-    
     // Handle exact matches and trailing slashes
     if (path === '/') {
       return pathname === '/';
@@ -113,6 +116,17 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/resume.pdf"
+                  download="Noah Tajalli Resume.pdf"
+                  className={styles.navLink}
+                  onClick={handleResumeDownload}
+                >
+                  <span className={styles.linkText}>Resume</span>
+                  <div className={styles.linkUnderline}></div>
+                </a>
+              </li>
             </ul>
           </nav>
 
@@ -177,6 +191,16 @@ const Navbar = () => {
                 </Link>
               </li>
             ))}
+            <li style={{ animationDelay: `${0.3 + navigationLinks.length * 0.1}s` }}>
+              <a
+                href="/resume.pdf"
+                download="Noah Tajalli Resume.pdf"
+                className={styles.mobileLink}
+                onClick={() => { closeMenu(); handleResumeDownload(); }}
+              >
+                <span className={styles.mobileLinkText}>Resume</span>
+              </a>
+            </li>
           </ul>
         </div>
       </nav>

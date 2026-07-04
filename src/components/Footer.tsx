@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from '../styles/Footer.module.css';
-import { trackSocialClick, trackNavigation, trackCTAClick, trackEmailClick, trackPhoneClick } from '@/lib/analytics';
+import { trackSocialClick, trackNavigation, trackCTAClick, trackEmailClick, trackPhoneClick, trackDownload } from '@/lib/analytics';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -24,6 +24,10 @@ const Footer = () => {
     } else if (method === 'phone') {
       trackPhoneClick('footer');
     }
+  };
+
+  const handleResumeDownload = () => {
+    trackDownload('Noah Tajalli Resume', 'pdf');
   };
 
   const socialLinks = [
@@ -104,6 +108,16 @@ const Footer = () => {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href="/resume.pdf"
+                  download="Noah Tajalli Resume.pdf"
+                  className={styles.quickLink}
+                  onClick={handleResumeDownload}
+                >
+                  Resume
+                </a>
+              </li>
             </ul>
           </div>
 

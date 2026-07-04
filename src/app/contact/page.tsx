@@ -239,7 +239,7 @@ export default function Contact() {
                   <span className={styles.statusText}>Open to new opportunities</span>
                 </div>
                 <p className={styles.availabilityDescription}>
-                  I&apos;m currently working as a Software Development Engineer at AWS on the EC2 VPC team. 
+                  I&apos;m currently working as a Software Development Engineer at AWS on the EC2 Networking/VPC Control Plane team.
                   I&apos;m always interested in discussing interesting projects, networking opportunities, and potential collaborations!
                 </p>
               </div>
