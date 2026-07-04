@@ -65,7 +65,7 @@ export default function Contact() {
   };
 
   const handleLinkedInClick = () => {
-    trackExternalLink('https://linkedin.com/in/your-profile', 'LinkedIn Profile');
+    trackExternalLink('https://www.linkedin.com/in/noah-tajalli/', 'LinkedIn Profile');
   };
 
   return (
@@ -225,7 +225,7 @@ export default function Contact() {
                   <div className={styles.methodContent}>
                     <h3 className={styles.methodTitle}>LinkedIn</h3>
                     <p className={styles.methodDescription}>Professional networking</p>
-                    <a href="https://linkedin.com/in/your-profile" className={styles.methodLink} target="_blank" rel="noopener noreferrer" onClick={handleLinkedInClick}>
+                    <a href="https://www.linkedin.com/in/noah-tajalli/" className={styles.methodLink} target="_blank" rel="noopener noreferrer" onClick={handleLinkedInClick}>
                       Connect on LinkedIn
                     </a>
                   </div>
